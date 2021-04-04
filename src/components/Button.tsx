@@ -6,6 +6,10 @@ type Props = {
 }
 
 const StyledButton = styled.button`
+  background: #e48900;
+  border: none;
+  border-radius: 8px;
+  font-size: 26px;
 `;
 
 const Button: React.FC<Props> = ( {label} ) => {

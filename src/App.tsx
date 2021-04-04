@@ -3,9 +3,12 @@ import styled from 'styled-components';
 import Calculator from './components/Calculator';
 
 const Container = styled.div`
+  align-items: center;
+  background: #323232;
   display: flex;
-  min-height: 100vh;
   flex-direction: column;
+  justify-content: center;
+  min-height: 100vh;
  
 `;
 
