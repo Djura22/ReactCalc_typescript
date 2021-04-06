@@ -4,7 +4,7 @@ import Calculator from './components/Calculator';
 
 const Container = styled.div`
   align-items: center;
-  background: #323232;
+  background: #000000;
   display: flex;
   flex-direction: column;
   justify-content: center;
