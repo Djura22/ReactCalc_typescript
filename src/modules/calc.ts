@@ -7,13 +7,13 @@
 export enum InputType {
   Number,
   Operator
-}
+};
 
 export enum OpType {
   Add = 'add',
   Subtract = 'subtract',
   Equals = 'equals'
-}
+};
 
 export type CalcInput = 
   | {type: InputType.Number, value: number}
@@ -32,12 +32,12 @@ export type CalcState = {
 export type Operation = {
   operator: OpType;
   value: number;
-}
+};
 
 type OpsBuilder = {
   operations: Operation[];
   working: Operation;
-}
+};
 
 const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
   const builder = inputs.reduce<OpsBuilder>((builder, input) => {
@@ -74,12 +74,14 @@ const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
 }; 
 
 const getState = (inputs: Array<CalcInput>): CalcState => {
-  return { displayValue: 0}
-}
+  const operations = getOperations(inputs);
+  const total = operations.reduce<number>((sum, operation) => sum + operation.value, 0);
+  return { displayValue: total};
+};
 
 const Calc = {
   getOperations,
   getState
-}
+};
 
 export default Calc;

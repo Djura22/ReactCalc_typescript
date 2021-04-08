@@ -18,9 +18,9 @@ test('is generating operations', () => {
 
   expect(Calc.getOperations(inputs)).toEqual(operations);
 
-})
+});
 
-test('state', () => {
+test('result/state after operation', () => {
   const inputs: Array<CalcInput> = [
     {type: InputType.Number, value: 7},
     {type: InputType.Number, value: 5},
@@ -32,4 +32,4 @@ test('state', () => {
   const state = Calc.getState(inputs);
   expect(state.displayValue).toEqual(100);
 
-})
+});
