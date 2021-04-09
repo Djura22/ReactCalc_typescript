@@ -28,6 +28,15 @@ test('displayValue is 0 when no inputs', () => {
 
 });
 
+test('displayValue is read from first input', () => {
+  const inputs: Array<CalcInput> = [
+    {type: InputType.Number, value: 1}
+  ];
+
+  const state = Calc.getState(inputs);
+  expect(state.displayValue).toEqual(1);
+});
+
 test('displayValue correct (addition and subtraction)', () => {
   const inputs: Array<CalcInput> = [
     {type: InputType.Number, value: 7},

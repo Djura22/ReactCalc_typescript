@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import Calc, {CalcInput} from '../modules/calc';
+import Calc, {CalcInput, InputType} from '../modules/calc';
 import Button, {ButtonType} from './Button';
 
 const Container = styled.div`
@@ -28,6 +28,11 @@ const Calculator: React.FC<{}> = () => {
 
   const [inputs, setInputs] = useState<Array<CalcInput>>([]);
   const state = Calc.getState(inputs);
+
+  const handleNumber = (value: number) => () => {
+    setInputs(prev => [...prev, {type: InputType.Number, value}]);
+  }
+
   return (
     <Container>
       <Grid>
@@ -37,16 +42,16 @@ const Calculator: React.FC<{}> = () => {
         <Button label="+" position={[3, 2]} />
         <Button label="-" position={[3, 3]} />
         <Button label="=" position={[3, 4]} height={2} />
-        <Button type={ButtonType.Number} label="9" position={[2, 2]} />
-        <Button type={ButtonType.Number} label="8" position={[1, 2]} />
-        <Button type={ButtonType.Number} label="7" position={[0, 2]} />
-        <Button type={ButtonType.Number} label="6" position={[2, 3]} />
-        <Button type={ButtonType.Number} label="5" position={[1, 3]} />
-        <Button type={ButtonType.Number} label="4" position={[0, 3]} />
-        <Button type={ButtonType.Number} label="3" position={[2, 4]} />
-        <Button type={ButtonType.Number} label="2" position={[1, 4]} />
-        <Button type={ButtonType.Number} label="1" position={[0, 4]} />
-        <Button type={ButtonType.Number} label="0" position={[0, 5]} width={3} />
+        <Button buttonType={ButtonType.Number} label="9" position={[2, 2]} onClick={handleNumber(9)}/>
+        <Button buttonType={ButtonType.Number} label="8" position={[1, 2]} onClick={handleNumber(8)}/>
+        <Button buttonType={ButtonType.Number} label="7" position={[0, 2]} onClick={handleNumber(7)}/>
+        <Button buttonType={ButtonType.Number} label="6" position={[2, 3]} onClick={handleNumber(6)}/>
+        <Button buttonType={ButtonType.Number} label="5" position={[1, 3]} onClick={handleNumber(5)}/>
+        <Button buttonType={ButtonType.Number} label="4" position={[0, 3]} onClick={handleNumber(4)}/>
+        <Button buttonType={ButtonType.Number} label="3" position={[2, 4]} onClick={handleNumber(3)}/>
+        <Button buttonType={ButtonType.Number} label="2" position={[1, 4]} onClick={handleNumber(2)}/>
+        <Button buttonType={ButtonType.Number} label="1" position={[0, 4]} onClick={handleNumber(1)}/>
+        <Button buttonType={ButtonType.Number} label="0" position={[0, 5]} width={3} />
       </Grid>
     </Container>
   );  
