@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
+import Calc, {CalcInput} from '../modules/calc';
 import Button, {ButtonType} from './Button';
 
 const Container = styled.div`
@@ -24,10 +25,13 @@ const Display = styled.div`
 `;
 
 const Calculator: React.FC<{}> = () => {
+
+  const [inputs, setInputs] = useState<Array<CalcInput>>([]);
+  const state = Calc.getState(inputs);
   return (
     <Container>
       <Grid>
-        <Display>48</Display>
+        <Display>{state.displayValue}</Display>
         <Button label="AC" position={[0, 1]} width={2} />
         <Button label="DEL" position={[2, 1]} width={2} />
         <Button label="+" position={[3, 2]} />
