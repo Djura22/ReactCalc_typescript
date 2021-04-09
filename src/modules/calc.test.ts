@@ -28,7 +28,23 @@ test('displayValue is 0 when no inputs', () => {
 
 });
 
-test('correctly performs Addition', () => {
+test('displayValue correct (addition and subtraction)', () => {
+  const inputs: Array<CalcInput> = [
+    {type: InputType.Number, value: 7},
+    {type: InputType.Number, value: 5},
+    {type: InputType.Operator, operator: OpType.Add},
+    {type: InputType.Number, value: 2},
+    {type: InputType.Operator, operator: OpType.Subtract},
+    {type: InputType.Number, value: 5},
+    {type: InputType.Operator, operator: OpType.Equals},
+  ]
+
+  const state = Calc.getState(inputs);
+  expect(state.displayValue).toEqual(72);
+
+});
+
+test('displayValue correct after performing Addition', () => {
   const inputs: Array<CalcInput> = [
     {type: InputType.Number, value: 7},
     {type: InputType.Number, value: 5},

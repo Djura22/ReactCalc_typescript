@@ -6,7 +6,8 @@
 
 export enum InputType {
   Number,
-  Operator
+  Operator,
+  Memory
 };
 
 export enum OpType {
@@ -69,7 +70,19 @@ const getOperationsBuilder = (inputs: Array<CalcInput>): OpsBuilder => {
     working: {operator: OpType.Add, value: 0},
   }
   );
-}; 
+};
+
+const getTotal = (operations: Array<Operation>): number =>
+  operations.reduce<number>((sum, operation) => {
+    switch(operation.operator) {
+      case OpType.Add:
+        return sum + operation.value;
+      case OpType.Subtract:
+        return sum - operation.value;
+      case OpType.Equals:
+        return sum;
+    }
+  }, 0);
 
 const getState = (inputs: Array<CalcInput>): CalcState => {
   const builder = getOperationsBuilder(inputs);
@@ -79,11 +92,7 @@ const getState = (inputs: Array<CalcInput>): CalcState => {
 
   switch(lastOperation.operator) {
     case OpType.Equals:
-      const total = operations.reduce<number>(
-        (sum, operation) => sum + operation.value,
-        0
-      );
-      return {displayValue: total};
+      return {displayValue: getTotal(operations)};
     
     default:
       return {displayValue: builder.working.value};
