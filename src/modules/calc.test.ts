@@ -16,11 +16,19 @@ test('is generating operations', () => {
     {operator: OpType.Equals, value: 0}
   ]
 
-  expect(Calc.getOperations(inputs)).toEqual(operations);
+  expect(Calc.getOperationsBuilder(inputs).operations).toEqual(operations);
 
 });
 
-test('result/state after operation', () => {
+test('displayValue is 0 when no inputs', () => {
+  const inputs: Array<CalcInput> = []
+
+  const state = Calc.getState(inputs);
+  expect(state.displayValue).toEqual(0);
+
+});
+
+test('correctly performs Addition', () => {
   const inputs: Array<CalcInput> = [
     {type: InputType.Number, value: 7},
     {type: InputType.Number, value: 5},

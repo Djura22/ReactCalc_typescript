@@ -39,9 +39,8 @@ type OpsBuilder = {
   working: Operation;
 };
 
-const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
-  const builder = inputs.reduce<OpsBuilder>((builder, input) => {
-
+const getOperationsBuilder = (inputs: Array<CalcInput>): OpsBuilder => {
+  return inputs.reduce<OpsBuilder>((builder, input) => {
     switch(input.type) {
       case InputType.Number:
         const prevValue = builder.working?.value || 0;
@@ -68,19 +67,31 @@ const getOperations = (inputs: Array<CalcInput>): Array<Operation> => {
   {
     operations: [],
     working: {operator: OpType.Add, value: 0},
-  } as OpsBuilder
+  }
   );
-  return builder.operations;
 }; 
 
 const getState = (inputs: Array<CalcInput>): CalcState => {
-  const operations = getOperations(inputs);
-  const total = operations.reduce<number>((sum, operation) => sum + operation.value, 0);
-  return { displayValue: total};
+  const builder = getOperationsBuilder(inputs);
+  const {operations} = builder;
+  const lastOperation = operations.length ? operations[operations.length -1] : null;
+  if (!lastOperation) return {displayValue: 0};
+
+  switch(lastOperation.operator) {
+    case OpType.Equals:
+      const total = operations.reduce<number>(
+        (sum, operation) => sum + operation.value,
+        0
+      );
+      return {displayValue: total};
+    
+    default:
+      return {displayValue: builder.working.value};
+  }
 };
 
 const Calc = {
-  getOperations,
+  getOperationsBuilder,
   getState
 };
 
