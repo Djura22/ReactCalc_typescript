@@ -62,7 +62,6 @@ const getOperationsBuilder = (inputs: Array<CalcInput>): OpsBuilder => {
             working: {operator: input.operator, value: 0}
           };
         }
-
     }
   }, 
   {

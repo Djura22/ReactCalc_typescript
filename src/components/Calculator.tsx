@@ -4,7 +4,6 @@ import Calc, {CalcInput, InputType, OpType} from '../modules/calc';
 import Button, {ButtonType} from './Button';
 
 const Container = styled.div`
-
 `;
 
 const Grid = styled.div`
