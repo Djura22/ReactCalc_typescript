@@ -35,6 +35,8 @@ const Calculator: React.FC<{}> = () => {
 
   const handleAC = () => {setInputs([])};
 
+  const handleDEL = () => setInputs(prev => prev.slice(0, -1));
+
   const handleNumber = (value: number) => () =>
     appendInput({type: InputType.Number, value});
 
@@ -46,7 +48,7 @@ const Calculator: React.FC<{}> = () => {
       <Grid>
         <Display>{state.displayValue}</Display>
         <Button label="AC" position={[0, 1]} width={2} onClick={handleAC} />
-        <Button label="DEL" position={[2, 1]} width={2} />
+        <Button label="DEL" position={[2, 1]} width={2} onClick={handleDEL} />
         <Button label="+" position={[3, 2]} onClick={handleOperator(OpType.Add)} />
         <Button label="-" position={[3, 3]} onClick={handleOperator(OpType.Subtract)} />
         <Button label="=" position={[3, 4]} height={2} onClick={handleOperator(OpType.Equals)} />
