@@ -90,12 +90,19 @@ const getState = (inputs: Array<CalcInput>): CalcState => {
   const lastOperation = operations.length ? operations[operations.length -1] : null;
   if (!lastOperation) return {displayValue: builder.working.value};
 
+  const lastInput = inputs.length ? inputs[inputs.length - 1] : null;
+  const total = getTotal(operations);
+
   switch(lastOperation.operator) {
     case OpType.Equals:
-      return {displayValue: getTotal(operations)};
+      return {displayValue: total};
     
     default:
-      return {displayValue: builder.working.value};
+      return {
+        displayValue:
+        lastInput && lastInput.type === InputType.Number
+        ? builder.working.value : total
+      };
   }
 };
 

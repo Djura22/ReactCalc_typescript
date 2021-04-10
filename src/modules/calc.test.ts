@@ -37,6 +37,17 @@ test('displayValue is read from first input', () => {
   expect(state.displayValue).toEqual(1);
 });
 
+test('displayValue retained after operator input', () => {
+  const inputs: Array<CalcInput> = [
+    {type: InputType.Number, value: 1},
+    {type: InputType.Number, value: 2},
+    {type: InputType.Operator, operator: OpType.Add}
+  ];
+
+  const state = Calc.getState(inputs);
+  expect(state.displayValue).toEqual(12);
+});
+
 test('displayValue correct (addition and subtraction)', () => {
   const inputs: Array<CalcInput> = [
     {type: InputType.Number, value: 7},
